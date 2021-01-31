@@ -46,6 +46,7 @@ MonoBehaviour:
   playerConfigData:
     HP_Base: 10
     HP_Recover: 1
+    atk_Base: 1
     actionMercyBaseRate: 0.4
     actionAttackBaseRate: 0.25
     actionEscapeBaseRate: 0.35
@@ -55,19 +56,272 @@ MonoBehaviour:
   unitConfigDatas:
   - id: 201
     name: "\u8868\u54E5"
-    textOnShow: "\u8868\u54E5\u62A2\u8D70\u4E86\u4F60\u7684\u7535\u89C6"
+    textOnShow: "\u8868\u54E5\u62A2\u8D70\u4E86\u4F60\u7684\u7535\u89C6\u9065\u63A7\u5668"
     skillIds: 
     items: 
     atk: 1
     hp: 3
     reaction: 
+    maxRound: 99
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A\u6C6A"
+    skillIds: 
+    items: 
+    atk: -2
+    hp: 3
+    reaction: 
+    maxRound: 2
+  - id: 203
+    name: "\u8BFE\u672C"
+    textOnShow: "\u4F60\u770B\u5F97\u61C2\u6211\u5417\uFF1F"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 5
+  - id: 204
+    name: "\u5377\u5B50"
+    textOnShow: "\u8001\u5E08\u5BF9\u4F60\u5F88\u5931\u671B"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 5
+  - id: 205
+    name: "\u670B\u53CB"
+    textOnShow: "\u5F00\u5FC3\u4E00\u70B9\uFF0C\u6211\u5E26\u4F60\u51FA\u53BB\u73A9\uFF01"
+    skillIds: 
+    items: 
+    atk: -1
+    hp: 1
+    reaction: 00000000
+    maxRound: 2
+  - id: 206
+    name: "\u4E5E\u4E10"
+    textOnShow: "\u4E09\u5929\u6CA1\u5403\u996D\u4E86\u2026\u2026\u53EF\u601C\u53EF\u601C\u4FFA\u5427"
+    skillIds: 
+    items: 
+    atk: 0
+    hp: 3
+    reaction: 00000000
+    maxRound: 2
+  - id: 207
+    name: "\u9A97\u5B50"
+    textOnShow: "\u4E09\u5929\u6CA1\u5403\u996D\u4E86\u2026\u2026\u4E5F\u53EF\u601C\u53EF\u601C\u4FFA\u5427"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 6
+    reaction: 00000000
+    maxRound: 99
+  - id: 208
+    name: "\u6697\u604B\u5BF9\u8C61"
+    textOnShow: "\u8FD9\u9053\u9898\u4E0D\u4F1A\u7684\u8BDD\uFF0C\u6211\u6559\u4F60\u554A"
+    skillIds: 
+    items: 
+    atk: -2
+    hp: 99
+    reaction: 00000000
+    maxRound: 5
+  - id: 209
+    name: "\u6821\u82B1"
+    textOnShow: "\u5567\u5567\u5567\u2026\u2026\u4F60\u770B\u770B\u8FD9\u4EBA\u7684\u6837\u5B50"
+    skillIds: 
+    items: 
+    atk: 2
+    hp: 10
+    reaction: 00000000
+    maxRound: 3
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u55F7\u545C\uFF01\uFF01\uFF01"
+    skillIds: 
+    items: 
+    atk: -1
+    hp: 3
+    reaction: 00000000
+    maxRound: 5
+  - id: 211
+    name: "\u6559\u5BFC\u4E3B\u4EFB"
+    textOnShow: "\u6765\u6211\u529E\u516C\u5BA4\u4E00\u4E0B"
+    skillIds: 
+    items: 
+    atk: 0
+    hp: 5
+    reaction: 00000000
+    maxRound: 10
+  - id: 210
+    name: "\u5931\u604B\u602A"
+    textOnShow: "\u5199\u7684\u60C5\u4E66\uFF0C\u88AB\u6254\u8FDB\u5783\u573E\u6876\u4E86\u560E\u560E\u560E\uFF01"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 10
+    reaction: 00000000
+    maxRound: 99
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
     maxRound: 0
   - id: 202
-    name: "\u8001\u738B"
-    textOnShow: "\u6253\u5F00\u8863\u67DC\uFF0C\u9694\u58C1\u8001\u738B\u8DF3\u8D77\u6765"
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
     skillIds: 
     items: 
     atk: 1
     hp: 3
-    reaction: 
+    reaction: 00000000
     maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  - id: 202
+    name: "\u5C0F\u72D7"
+    textOnShow: "\u4E00\u53EA\u6C6A\u6C6A\u53EB\u7684\u5C0F\u72D7"
+    skillIds: 
+    items: 
+    atk: 1
+    hp: 3
+    reaction: 00000000
+    maxRound: 0
+  stageEnemyIds: 
