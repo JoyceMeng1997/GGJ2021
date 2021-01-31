@@ -54,7 +54,7 @@ public class GameManager
 
     public void ChangeScene(GAME_SCENE_STATE _targetScene)
     {
-        if (scene_state == _targetScene) return;
+        //if (scene_state == _targetScene) return;
 
         scene_state = _targetScene;
         SceneManager.LoadScene(SceneNames[(int)_targetScene]);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class BattleManager : MonoBehaviour
 {
@@ -13,10 +14,15 @@ public class BattleManager : MonoBehaviour
     public Text txt_enemyName;
     public Text txt_enemyInfo;
     public Text txt_enemyHP;
+
+    public Text txt_enemySpeak;
+
     public Image img_enemyHpBar;
     public Image imp_enemyPic;
 
     public OperateBar operateBar;
+
+    public DialogView dialogView;
     #endregion
 
     #region static
@@ -59,6 +65,9 @@ public class BattleManager : MonoBehaviour
         unitManager.InitPlayer();
 
         UpdatePlayerInfo(unitManager.playerData, false);
+
+        ShowOperateBar(false);
+
         CreateNewBattle();
     }
 
@@ -75,6 +84,18 @@ public class BattleManager : MonoBehaviour
         unitManager.CreateEnemy(enemyConfigData);
         UpdateEnemyInfo(unitManager.enemyData, false);
 
+        if(unitManager.enemyData != null)
+        {
+            txt_enemySpeak.text = "";
+            txt_enemySpeak.DOKill(true);
+            var duration = 3f;
+            txt_enemySpeak.DOText(unitManager.enemyData.configData.textOnShow, duration);
+
+            //var pic = Resources.Load<Sprite>
+            //imp_enemyPic.sprite
+
+        }
+        
         //
         RoundStart(0);
     }
@@ -88,9 +109,12 @@ public class BattleManager : MonoBehaviour
             {
                 GameOver(true);
             }
+            else
+            {
+                ShowDialog("You win", "退出","下一个", BackToMenuScene,PlayNextRound);
+            }
 
-            CreateNewBattle();
-
+            //CreateNewBattle();
         }
         else
         {
@@ -103,15 +127,30 @@ public class BattleManager : MonoBehaviour
         if (win)
         {
             Debug.LogErrorFormat("Game Over!!!!!!!!!!WIN!!!!!!!!!!!!!!!");
-
+            ShowSingleButtonDialog("You win", "退出",BackToMenuScene);
         }
         else
         {
             Debug.LogErrorFormat("Game Over!!!!!!!!!!!LOSS!!!!!!!!!!!!!!");
-
+            ShowDialog("You loss","退出","再来一遍", BackToMenuScene, RetryBattle);
         }
     }
 
+    public void PlayNextRound()
+    {
+        CreateNewBattle();
+    }
+
+    public void RetryBattle()
+    {
+        unitManager.InitPlayer();
+        CreateNewBattle();
+    }
+
+    public void BackToMenuScene()
+    {
+        GameManager.Instance.ChangeScene(GameManager.GAME_SCENE_STATE.MENU_BASE);
+    }
 
     #region battle round
     public void RoundStart(int _roundPid)
@@ -142,20 +181,62 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    void SetOperateValues()
+    {
+        var data = unitManager.playerData;
+        var rates = data.GetAllOperateValues();
+        var names = data.GetAllOperateNames();
+        int num = rates.Length;
+        operateBar.SetupOperateView(num, names, rates);
+        operateBar.SetTargetProgress(true);
+    }
+
+    void ShowOperateBar(bool _vis = true)
+    {
+        operateBar.gameObject.SetActive(_vis);
+    }
+
+
     IEnumerator RoundRunning()
     {
         yield return new WaitForSeconds(0.5f);
 
         //operateBar.SetupOperateView()
         Debug.LogFormat("RoundRunning :{0}", curInRoundPid);
-        //test todo
-        int damage = unitManager.playerData.curATK;
-        if(!DamageToTarget(damage, 0))
+        
+        ShowOperateBar(true);
+        SetOperateValues();
+    }
+
+    public void PlayerOperateCallback(int _operateIndex)
+    {
+        Debug.LogFormat("operate callback:{0}", unitManager.playerData.GetAllOperateNames()[_operateIndex]);
+
+        unitManager.playerData.ChangeValuesAfterOperate(_operateIndex);
+
+        if(_operateIndex == 1)
         {
+            int damage = unitManager.playerData.curATK;
+            if (!DamageToTarget(damage, 0))
+            {
+                RoundEnd();
+            }
+        }
+        else
+        {
+            if(_operateIndex == 0)
+            {
+                //0 = mercy
+                Debug.Log("mercy do nothing");
+            }
+            else
+            {
+                //==2 escape
+                Debug.Log("escape do nothing now");
+            }
             RoundEnd();
         }
-
-
+        
     }
 
     public void RoundEnd()
@@ -198,7 +279,7 @@ public class BattleManager : MonoBehaviour
         {
             unitManager.enemyData.curHP -= _damage;
             UpdateEnemyInfo(unitManager.enemyData, true);
-            if (unitManager.enemyData.curHP < 0)
+            if (unitManager.enemyData.curHP <= 0)
             {
                 EndBattle(true);
                 return true;
@@ -209,7 +290,7 @@ public class BattleManager : MonoBehaviour
             unitManager.playerData.curHP -= _damage;
             UpdatePlayerInfo(unitManager.playerData, true);
 
-            if (unitManager.playerData.curHP < 0)
+            if (unitManager.playerData.curHP <= 0)
             {
                 EndBattle(false);
                 return true;
@@ -270,4 +351,40 @@ public class BattleManager : MonoBehaviour
     }
 
     #endregion
+
+    #region dialog view
+    
+    public void ShowDialog(string _title,string _btnCancel,string _btnConfirm,
+        UnityAction _cancelCallback,UnityAction _confirmCallback)
+    {
+        dialogView.gameObject.SetActive(true);
+        dialogView.txt_cancel.text = _btnCancel;
+        dialogView.txt_confirm.text = _btnConfirm;
+        dialogView.txt_title.text = _title;
+
+        dialogView.SetCancelCallback(_cancelCallback);
+        dialogView.SetConfirmCallback(_confirmCallback);
+    }
+
+    public void ShowSingleButtonDialog(string _title, string _btnCancel,
+        UnityAction _cancelCallback)
+    {
+        dialogView.gameObject.SetActive(true);
+
+        dialogView.txt_cancel.text = _btnCancel;
+        dialogView.txt_confirm.text = "";
+        dialogView.txt_title.text = _title;
+
+        dialogView.SetCancelCallback(_cancelCallback);
+        dialogView.SetConfirmCallback(null);
+    }
+
+    public void HideDialog()
+    {
+        dialogView.gameObject.SetActive(false);
+        //dialogView.ResetCallbacks();
+    }
+    #endregion
+
+
 }

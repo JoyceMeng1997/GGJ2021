@@ -12,6 +12,8 @@ public class PlayerConfigData
     //public float actionAttack;
     //public float actionEscape;
 
+    public float minestActionValue = 0.05f;
+
     public float actionMercyBaseRate = 0.4f;
     public float actionAttackBaseRate = 0.25f;
     public float actionEscapeBaseRate = 0.35f;
@@ -20,6 +22,18 @@ public class PlayerConfigData
     public float actionAttackGrowRate = 0.1f;
     public float actionEscapeGrowRate = 0.08f;
 
+}
+
+[System.Serializable]
+public class ReactionConfigData
+{
+    [Tooltip("0=仁慈,1=攻击,2=逃跑")]
+    public int actionId;
+    [Tooltip("操作条改变大小")]
+    [Range(0,1f)]
+    public float actionEffect;
+    [Tooltip("反应时的提示文本")]
+    public string actionText;
 }
 
 [System.Serializable]
@@ -33,7 +47,18 @@ public class UnitConfigData
     public int atk;
     public int hp;
 
-    public int[] reaction;//反应，面对仁慈/攻击/逃跑的结果
+    [Tooltip("反应，面对仁慈/攻击/逃跑的结果")]
+    public ReactionConfigData[] reaction;//
+
+    [Tooltip("玩家遭遇对方时操作条上提示的文本")]
+    public string[] operateTexts;
+
+    [Tooltip("玩家击败对方时的文本")]
+    public string[] winTexts;
+
+    [Tooltip("玩家输给对方时的文本")]
+    public string[] lossTexts;
+
 
     public int maxRound;
 }
@@ -60,7 +85,14 @@ public class AllUnitConfigs : MonoBehaviour
         for (int i = 0; i < unitConfigDatas.Length; i++)
         {
             var item = unitConfigDatas[i];
-            unitConfigDatasDic.Add(item.id, item);
+            if (unitConfigDatasDic.ContainsKey(item.id))
+            {
+                Debug.LogErrorFormat("unit configs contains id {0},skipped it", item.id);
+            }
+            else
+            {
+                unitConfigDatasDic.Add(item.id, item);
+            }
         }
     }
 
