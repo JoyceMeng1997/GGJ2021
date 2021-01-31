@@ -46,6 +46,7 @@ public class BattleManager : MonoBehaviour
 
     public UnitManager unitManager;
 
+    static string CHARA_PATH = "Art/CharaPic/";
     #endregion
 
     // Start is called before the first frame update
@@ -91,8 +92,14 @@ public class BattleManager : MonoBehaviour
             var duration = 3f;
             txt_enemySpeak.DOText(unitManager.enemyData.configData.textOnShow, duration);
 
-            //var pic = Resources.Load<Sprite>
-            //imp_enemyPic.sprite
+            string path = string.Format("{0}cha_{1}", CHARA_PATH, unitManager.enemyData.configData.id);
+            //Debug.LogFormat("chara pic path:{0}", path);
+            var pic = Resources.Load<Sprite>(path);
+            if (pic != null)
+            {
+                imp_enemyPic.sprite = pic;
+                imp_enemyPic.SetNativeSize();
+            }
 
         }
         

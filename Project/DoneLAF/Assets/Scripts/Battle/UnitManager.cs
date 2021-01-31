@@ -10,7 +10,7 @@ public struct ItemPack
 
 public abstract class UnitData
 {
-    public int id;
+    //public int id;
     public int curHP;
     public int curMaxHP;
     public int curATK;
