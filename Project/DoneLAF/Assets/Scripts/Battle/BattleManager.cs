@@ -89,7 +89,7 @@ public class BattleManager : MonoBehaviour
         {
             txt_enemySpeak.text = "";
             txt_enemySpeak.DOKill(true);
-            var duration = 3f;
+            var duration = 1f;
             txt_enemySpeak.DOText(unitManager.enemyData.configData.textOnShow, duration);
 
             string path = string.Format("{0}cha_{1}", CHARA_PATH, unitManager.enemyData.configData.id);
